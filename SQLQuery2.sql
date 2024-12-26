@@ -1,24 +1,19 @@
-﻿-- إنشاء قاعدة بيانات جديدة
-CREATE DATABASE HotelDB;
+﻿CREATE DATABASE HotelDB;
 GO
 
--- استخدام قاعدة البيانات الجديدة
 USE HotelDB;
 GO
 
--- إنشاء جدول Room
 CREATE TABLE Room (
-    RoomID INT IDENTITY(1,1) PRIMARY KEY, -- Auto Increment
-    RoomNumber VARCHAR(10),
+    RoomID INT IDENTITY(1,1) PRIMARY KEY,    RoomNumber VARCHAR(10),
     RoomType VARCHAR(50),
     Capacity INT,
     PricePerNight DECIMAL(10, 2),
     AvailabilityStatus VARCHAR(20)
 );
 
--- إنشاء جدول Guest
 CREATE TABLE Guest (
-    GuestID INT IDENTITY(1,1) PRIMARY KEY, -- Auto Increment
+    GuestID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),
     PhoneNumber VARCHAR(15),
@@ -26,10 +21,8 @@ CREATE TABLE Guest (
     Address VARCHAR(255)
 );
 
--- إنشاء جدول Booking
 CREATE TABLE Booking (
-    BookingID INT IDENTITY(1,1) PRIMARY KEY, -- Auto Increment
-    CheckInDate DATE,
+    BookingID INT IDENTITY(1,1) PRIMARY KEY,    CheckInDate DATE,
     CheckOutDate DATE,
     NumberOfGuests INT,
     BookingStatus VARCHAR(20),
@@ -39,9 +32,8 @@ CREATE TABLE Booking (
     FOREIGN KEY (GuestID) REFERENCES Guest(GuestID)
 );
 
--- إنشاء جدول Billing
 CREATE TABLE Billing (
-    InvoiceID INT IDENTITY(1,1) PRIMARY KEY, -- Auto Increment
+    InvoiceID INT IDENTITY(1,1) PRIMARY KEY,
     TotalAmount DECIMAL(10, 2),
     PaymentStatus VARCHAR(20),
     PaymentMethod VARCHAR(50),
@@ -50,17 +42,15 @@ CREATE TABLE Billing (
     FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
 );
 
--- إنشاء جدول Service
 CREATE TABLE Service (
-    ServiceID INT IDENTITY(1,1) PRIMARY KEY, -- Auto Increment
+    ServiceID INT IDENTITY(1,1) PRIMARY KEY, 
     ServiceName VARCHAR(100),
     ServiceDescription TEXT,
     ServicePrice DECIMAL(10, 2)
 );
 
--- إنشاء جدول ServiceUsage
 CREATE TABLE ServiceUsage (
-    ServiceUsageID INT IDENTITY(1,1) PRIMARY KEY, -- Auto Increment
+    ServiceUsageID INT IDENTITY(1,1) PRIMARY KEY,
     UsageDate DATE,
     Quantity INT,
     BookingID INT,
